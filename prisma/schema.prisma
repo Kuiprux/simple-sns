@@ -6,6 +6,58 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id           Int       @id @default(autoincrement())
+  login_id          String    @unique
+  hashed_password   String
+  nickname          String?
+  description       String?
+  profile_image     Bytes?
+  posts             Post[]
+  comments          Comment[]
+  followers         Follow[]  @relation("Follower")
+  following         Follow[]  @relation("Followee")
+  like_posts        LikePost[]
+}
+
+model Post {
+  post_id           Int       @id @default(autoincrement())
+  user_id           Int
+  content           String?
+  time              DateTime?
+  user              User      @relation(fields: [user_id], references: [user_id])
+  comments          Comment[]
+  like_posts        LikePost[]
+}
+
+model Comment {
+  comment_id        Int       @id @default(autoincrement())
+  post_id           Int
+  user_id           Int
+  content           String?
+  time              DateTime?
+  post              Post      @relation(fields: [post_id], references: [post_id])
+  user              User      @relation(fields: [user_id], references: [user_id])
+}
+
+model Follow {
+  follower          Int
+  followee          Int
+  follower_user     User      @relation("Follower", fields: [follower], references: [user_id])
+  followee_user     User      @relation("Followee", fields: [followee], references: [user_id])
+
+  @@id([follower, followee])
+}
+
+model LikePost {
+  user_id           Int
+  post_id           Int
+  user              User      @relation(fields: [user_id], references: [user_id])
+  post              Post      @relation(fields: [post_id], references: [post_id])
+
+  @@id([user_id, post_id])
 }
