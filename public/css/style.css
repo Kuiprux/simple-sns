@@ -1,0 +1,125 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+.left {
+    width: 30%;
+}
+.right {
+    flex-grow: 1;
+}
+
+.title {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: darkblue;
+}
+
+.user-edit {
+    display: none;
+    margin-bottom: 20px;
+}
+.edit-mode > .user-edit {
+    display: block;
+}
+.user-view {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.user-basic-edit-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.edit-mode > .user-view {
+    display: none;
+}
+.account {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.user-info {
+    margin: 0 10px;
+}
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.user-name {
+    font-weight: bold;
+}
+.user-desc {
+    font-size: 0.8em;
+    color: #888;
+}
+.following-item {
+    margin-right: 10px;
+}
+.following-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.user-btn-container {
+    margin-left: auto;
+    margin-right: 10px;
+    display: flex;
+}
+.icon-btn {
+    margin-right: 5px;
+}
+
+.search-bar {
+    display: flex;
+    margin-bottom: 20px;
+}
+.search-input {
+    flex-grow: 1;
+    padding: 5px;
+}
+.simple-button {
+    padding: 5px 10px;
+    margin-left: 10px;
+}
+.post-element-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.post-element {
+    margin: 5px;
+}
+.post-edit {
+    display: none;
+}
+.post-edit-mode > .post-view {
+    display: none;
+}
+.post-edit-mode > .post-edit {
+    display: flex;
+}
+.user-panel {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.post-input {
+    display: flex;
+    margin-bottom: 20px;
+}
+.post-textarea, .post-edit-content {
+    flex-grow: 1;
+    padding: 5px;
+    resize: none;
+}
+
+.following-posts .post {
+    margin-bottom: 20px;
+}
+.post-content {
+    margin-top: 10px;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main - simple-sns</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/apiUtil.js"></script>
+    <script src="/js/divUtil.js"></script>
+    <script src="/js/commonPanel.js"></script>
+    <script src="/js/userPanel.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div id="title" class="title" onclick="location.href='/home.html'">simple-sns</div>
+            <div class="user-main-panel" id="user-panel">
+                <div class="user-view">
+                    <img id="profile-img" class="profile-image">
+                    <div class="user-info">
+                        <div id="username" class="user-name">이름</div>
+                        <div id="userdesc" class="user-desc">간단한설명</div>
+                    </div>
+                    <div class="user-btn-container">
+                        <img id="edit-profile-btn" class="icon-btn" src="/res/edit.png">
+                        <img id="logout-btn" class="icon-btn" src="/res/logout.png">
+                    </div>
+                </div>
+                <div class="user-edit">
+                    <div class="user-basic-edit-container">
+                        <img id="profile-img-edit" class="profile-image">
+                        <div class="user-info">
+                            <input id="username-edit" class="user-name" type="text" name="username" placeholder="이름">
+                            <input id="userdesc-edit" class="user-desc" type="text" name="userdesc" placeholder="간단한설명">
+                        </div>
+                        <div class="user-btn-container">
+                            <img id="save-profile-btn" class="icon-btn" src="/res/confirm.png">
+                            <img id="cancel-profile-btn" class="icon-btn" src="/res/cancel.png">
+                        </div>
+                    </div>
+                    <div class="user-login-edit-container">
+                        <input id="login-id-edit" class="login-id" type="text" name="login-id" placeholder="아이디">
+                        <input id="login-pw-edit" class="login-pw" type="password" name="login-pw" placeholder="비밀번호">
+                    </div>
+                </div>
+            </div>
+            <div class="following-panel">
+                <div class="following-label">Followings</div>
+                <div id="following-accounts" class="following-accounts">
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="search-bar">
+                <input id="search-input" class="search-input" type="text" name="search" placeholder="검색">
+                <button id="search-btn" class="simple-button" type="button">검색</button>
+            </div>
+            <div class="post-input">
+                <textarea id="post-content" class="post-textarea" name="post" placeholder="게시글 작성"></textarea>
+                <button id="post-btn" class="simple-button" type="button">게시</button>
+            </div>
+            <div class="user-panel">
+                <img id="user-page-profile-img" class="user-page profile-image">
+                <div class="user-info">
+                    <div id="user-page-username" class="user-page user-name">이름</div>
+                    <div id="user-page-userdesc" class="user-page user-desc">간단한설명</div>
+                </div>
+                <button id="user-page-follow-btn" class="user-page follow-button" type="button">팔로우</button>
+            </div>
+            <div id="user-posts" class="user-page following-posts">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
