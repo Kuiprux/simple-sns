@@ -11,53 +11,48 @@ datasource db {
 }
 
 model User {
-  user_id           Int       @id @default(autoincrement())
-  login_id          String    @unique
-  hashed_password   String
-  nickname          String?
-  description       String?
-  profile_image     Bytes?
-  posts             Post[]
-  comments          Comment[]
-  followers         Follow[]  @relation("Follower")
-  following         Follow[]  @relation("Followee")
-  like_posts        LikePost[]
+  user_id         Int        @id @default(autoincrement())
+  login_id        String     @unique
+  hashed_password String
+  nickname        String     @default("사용자")
+  description     String     @default("")
+  profile_image   String     @default("")
+  posts           Post[]
+  follow_froms    Follow[]   @relation("FollowFrom")
+  follow_tos      Follow[]   @relation("FollowTo")
+  like_posts      LikePost[]
+  Session         Session[]
 }
 
 model Post {
-  post_id           Int       @id @default(autoincrement())
-  user_id           Int
-  content           String?
-  time              DateTime?
-  user              User      @relation(fields: [user_id], references: [user_id])
-  comments          Comment[]
-  like_posts        LikePost[]
-}
-
-model Comment {
-  comment_id        Int       @id @default(autoincrement())
-  post_id           Int
-  user_id           Int
-  content           String?
-  time              DateTime?
-  post              Post      @relation(fields: [post_id], references: [post_id])
-  user              User      @relation(fields: [user_id], references: [user_id])
+  post_id    Int        @id @default(autoincrement())
+  user_id    Int
+  content    String?
+  time       DateTime?
+  user       User       @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  like_posts LikePost[]
 }
 
 model Follow {
-  follower          Int
-  followee          Int
-  follower_user     User      @relation("Follower", fields: [follower], references: [user_id])
-  followee_user     User      @relation("Followee", fields: [followee], references: [user_id])
+  follow_from      Int
+  follow_to        Int
+  follow_from_user User @relation("FollowFrom", fields: [follow_from], references: [user_id], onDelete: Cascade)
+  follow_to_user   User @relation("FollowTo", fields: [follow_to], references: [user_id], onDelete: Cascade)
 
-  @@id([follower, followee])
+  @@id([follow_from, follow_to])
 }
 
 model LikePost {
-  user_id           Int
-  post_id           Int
-  user              User      @relation(fields: [user_id], references: [user_id])
-  post              Post      @relation(fields: [post_id], references: [post_id])
+  user_id Int
+  post_id Int
+  user    User @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  post    Post @relation(fields: [post_id], references: [post_id], onDelete: Cascade)
 
   @@id([user_id, post_id])
+}
+
+model Session {
+  session_id String @id
+  user_id    Int
+  user       User   @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 }
