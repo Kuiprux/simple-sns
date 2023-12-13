@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id         Int        @id @default(autoincrement())
+  login_id        String     @unique
+  hashed_password String
+  nickname        String     @default("사용자")
+  description     String     @default("")
+  profile_image   String     @default("")
+  posts           Post[]
+  follow_froms    Follow[]   @relation("FollowFrom")
+  follow_tos      Follow[]   @relation("FollowTo")
+  like_posts      LikePost[]
+  Session         Session[]
+}
+
+model Post {
+  post_id    Int        @id @default(autoincrement())
+  user_id    Int
+  content    String?
+  time       DateTime?
+  user       User       @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  like_posts LikePost[]
+}
+
+model Follow {
+  follow_from      Int
+  follow_to        Int
+  follow_from_user User @relation("FollowFrom", fields: [follow_from], references: [user_id], onDelete: Cascade)
+  follow_to_user   User @relation("FollowTo", fields: [follow_to], references: [user_id], onDelete: Cascade)
+
+  @@id([follow_from, follow_to])
+}
+
+model LikePost {
+  user_id Int
+  post_id Int
+  user    User @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  post    Post @relation(fields: [post_id], references: [post_id], onDelete: Cascade)
+
+  @@id([user_id, post_id])
+}
+
+model Session {
+  session_id String @id
+  user_id    Int
+  user       User   @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+}

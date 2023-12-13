@@ -1,3 +1,10 @@
+node_modules
+# Keep environment variables out of version control
+.env
+
+# Builds
+build
+
 # Logs
 logs
 *.log
@@ -125,3 +132,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# google cloud service account file
+service-account.json
